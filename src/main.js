@@ -14,15 +14,27 @@ const lightbox = new SimpleLightbox('.gallery a', {
 
 const form = document.querySelector('.search-form');
 const container = document.querySelector('.gallery');
+const loader = document.querySelector('.loader');
 let searchWord = '';
 
 form.addEventListener('submit', onSubmit);
 
+loader.style.display = 'none';
+
+
 function onSubmit(event) {
   event.preventDefault();
 
+  loader.style.display = 'inline-block';
+
+
   container.innerHTML = '';
   searchWord = form.elements.searchWord.value.trim();
+
+  if (searchWord === '') {
+    alert('Будь ласка, введіть слово для пошуку');
+    return; 
+  }
 
   fetchImages(searchWord)
     .then(data => {
