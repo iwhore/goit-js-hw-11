@@ -1,6 +1,8 @@
 import SimpleLightbox from 'simplelightbox';
-
 import 'simplelightbox/dist/simple-lightbox.min.css';
+
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
 import { renderMarkup } from './js/render-functions';
 import { fetchImages } from './js/pixabay-api';
@@ -32,9 +34,16 @@ function onSubmit(event) {
   searchWord = form.elements.searchWord.value.trim();
 
   if (searchWord === '') {
-    alert('Будь ласка, введіть слово для пошуку');
+    iziToast.error({
+      title: 'Error',
+      titleColor: '#FFFFFF',
+      backgroundColor: '#ef4040',
+      position: 'topRight',
+      messageColor: '#FFFFFF',
+      message: 'Please search for something',
+    });
     loader.style.display = 'none';
-    return; 
+    return;
   }
 
   fetchImages(searchWord)
