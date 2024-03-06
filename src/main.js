@@ -33,6 +33,7 @@ function onSubmit(event) {
 
   if (searchWord === '') {
     alert('Будь ласка, введіть слово для пошуку');
+    loader.style.display = 'none';
     return; 
   }
 
